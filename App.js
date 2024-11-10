@@ -14,6 +14,13 @@ const HomeScreen = () => {
   );
 };
 
+const CalendarScreen = () => {
+  return(
+    <View>
+      <Text>Calendar Screen</Text>
+    </View>
+  );
+};
 
 export default function App() {
   return (
