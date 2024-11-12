@@ -1,19 +1,30 @@
+import React, { useState } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { createStackNavigator } from '@react-navigation/stack';
+import Uebersicht from './screens/HomeScreen';
+import JobHinzufuegen from './screens/addJob';
 
-import HomeScreen from './screens/HomeScreen';
-import CalendarScreen from './screens/CalandarScreen';
+const Stack = createStackNavigator();
 
-const bottomTab = createBottomTabNavigator();
+function App() {
+  const [jobs, setJobs] = useState([]);
 
-export default function App() {
+  const addJob = (name, stundenlohn) => {
+    setJobs([...jobs, { name, stundenlohn }]);
+  };
+
   return (
     <NavigationContainer>
-      <bottomTab.Navigator>
-        <bottomTab.Screen  name='Home' component={HomeScreen} />
-        <bottomTab.Screen  name='Calendar' component={CalendarScreen} />
-      </bottomTab.Navigator>
+      <Stack.Navigator>
+        <Stack.Screen name="Uebersicht">
+          {(props) => <Uebersicht {...props} jobs={jobs} />}
+        </Stack.Screen>
+        <Stack.Screen name="JobHinzufuegen">
+          {(props) => <JobHinzufuegen {...props} addJob={addJob} />}
+        </Stack.Screen>
+      </Stack.Navigator>
     </NavigationContainer>
   );
 }
 
+export default App;

@@ -1,19 +1,36 @@
-import { StyleSheet, View, Text } from "react-native";
+import React from 'react';
+import { View, Text, Button, FlatList, StyleSheet } from 'react-native';
 
-const HomeScreen = () => {
-    return(
-        <View style={styles.container}>
-            <Text>Home Screen</Text>
-        </View>
-    )
+function Uebersicht({ navigation, jobs }) {
+  return (
+    <View style={styles.container}>
+      <Text style={styles.headerStyle}>Übersicht der Jobs</Text>
+      <FlatList
+        data={jobs}
+        keyExtractor={(item, index) => index.toString()}
+        renderItem={({ item }) => (
+          <Text style={styles.itemStyle}>
+            Name: {item.name}, Stundenlohn: {item.stundenlohn}€
+          </Text>
+        )}
+      />
+      <Button title="Neuen Job Hinzufügen" onPress={() => navigation.navigate('JobHinzufuegen')} />
+    </View>
+  );
 }
 
-export default HomeScreen
-
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center'
+    container:{
+        padding: 20,
     },
-});
+    headerStyle: {
+        fontSize: 24,
+        marginBottom: 10,
+    },
+    itemStyle:{
+        fontSize: 18,
+        marginVertical: 5,
+    },
+})
+
+export default Uebersicht;
