@@ -1,34 +1,28 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
 
-function AddJob({ navigation, addJob }) {
-  const [name, setName] = useState('');
-  const [stundenlohn, setStundenlohn] = useState('');
+function JobOverview({ navigation, addJob }) {
+  const [date, setDate] = useState('');
+  const [hours, setHours] = useState('');
 
-  const handleAddJob = () => {
-    if (name && stundenlohn) {
-      addJob(name, stundenlohn);
-      navigation.goBack();
-    }
-  };
 
   return (
     <View style={styles.container}>
-      <Text style={styles.textStyle}>Neuen Job Hinzufügen</Text>
+      <Text style={styles.textStyle}>Arbeitszeit einfügen</Text>
       <TextInput
-        placeholder="Job Name"
-        value={name}
-        onChangeText={setName}
+        placeholder="Datum"
+        value={date}
+        onChangeText={setDate}
         style={styles.textInputStyle}
       />
       <TextInput
         placeholder="Stundenlohn"
-        value={stundenlohn}
-        onChangeText={setStundenlohn}
+        value={hours}
+        onChangeText={setHours}
         keyboardType="numeric"
         style={styles.textInputStyle}
       />
-      <Button title="Job Hinzufügen" onPress={handleAddJob} style={styles.addJobButton}/>
+      <Button title="Job Hinzufügen" style={styles.addJobButton}/>
     </View>
   );
 }
@@ -56,4 +50,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default AddJob;
+export default JobOverview;
